@@ -57,3 +57,4 @@ repositories.json
 application*.yml
 application*.properties
 !</iteral
+Thumbs.db
