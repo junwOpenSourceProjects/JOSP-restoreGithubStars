@@ -3,6 +3,7 @@
 
 # Log file
 *.log
+logs/
 
 # BlueJ files
 *.ctxt
@@ -44,6 +45,7 @@ buildNumber.properties
 .project
 .classpath
 .settings/
+.factorypath
 .vscode/
 *.swp
 *.swo
@@ -56,5 +58,7 @@ repositories.json
 # Application
 application*.yml
 application*.properties
-!</iteral
+.env
+
+# OS
 Thumbs.db
