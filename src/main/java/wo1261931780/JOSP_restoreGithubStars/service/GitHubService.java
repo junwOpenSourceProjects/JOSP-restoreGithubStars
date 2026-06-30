@@ -14,7 +14,9 @@ import wo1261931780.JOSP_restoreGithubStars.entity.Repository;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -49,9 +51,12 @@ public class GitHubService {
 			}
 			newOne.setRepositorieName(githubDTO.getName());
 			newOne.setCodeLanguage(githubDTO.getLanguage());
-			newOne.setHtmlUrl(githubDTO.getUrl());
+			newOne.setHtmlUrl(githubDTO.getHtmlUrl());
 			newOne.setForksCount(githubDTO.getForks());
 			newOne.setWatchersCount(githubDTO.getWatchers());
+			newOne.setPushedAt(parseDate(githubDTO.getPushedAt()));
+			newOne.setCreatedAt(parseDate(githubDTO.getCreatedAt()));
+			newOne.setUpdatedAt(parseDate(githubDTO.getUpdatedAt()));
 			// newOne.setRepositorieName(githubDTO.getFullName());
 			if (Objects.nonNull(githubDTO.getLicense())) {
 				newOne.setLicenseName(githubDTO.getLicense().getName());
@@ -77,5 +82,17 @@ public class GitHubService {
 	// 方法用于 Unstar 一个仓库
 	public ResponseEntity<Void> unstarRepository(Repository repository) {
 		return githubClient.unstarRepository(repository);
+	}
+
+	private Date parseDate(String date) {
+		if (Objects.isNull(date) || date.isBlank()) {
+			return null;
+		}
+		try {
+			return Date.from(Instant.parse(date));
+		} catch (Exception e) {
+			log.warn("无法解析日期: {}", date);
+			return null;
+		}
 	}
 }

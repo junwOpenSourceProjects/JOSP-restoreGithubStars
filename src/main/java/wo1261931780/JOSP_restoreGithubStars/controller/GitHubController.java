@@ -25,7 +25,7 @@ public class GitHubController {
 	 */
 	@GetMapping("/stars/{username}")
 	public ShowResult<List<Repositories>> getStarredRepositories(@PathVariable String username) {
-		List<Repositories> repositories = gitHubService.getStarredRepositories("wo1261931780");
+		List<Repositories> repositories = gitHubService.getStarredRepositories(username);
 		return ShowResult.sendSuccess(repositories);
 	}
 
